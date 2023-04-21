@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "dtc-project"
+version = "0.1.0"
+description = ""
+authors = ["Andrei Kazakevich <pref@outlook.com>"]
+readme = "README.md"
+packages = [{include = "dtc_project"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+prefect = "^2.10.5"
+prefect-gcp = "^0.4.1"
+prefect-dbt = "^0.3.1"
+pandas = "^2.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+wemake-python-styleguide = "^0.17.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

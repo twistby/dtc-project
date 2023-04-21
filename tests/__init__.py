@@ -1,0 +1,1 @@
+"""DataTalkClub DE-zoomcamp project."""
