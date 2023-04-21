@@ -4,3 +4,4 @@ dist/
 .venv/
 .vscode/
 .DS_Store
+dtc_project/keys/*.*
