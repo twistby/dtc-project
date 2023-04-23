@@ -31,7 +31,7 @@ def get_schools() -> pd.DataFrame:
     logger = get_run_logger()
     logger.info('INFO: Starting ingesting schools data for')
 
-    if RAW_DATA_SCHOOLS_URL in os.environ():
+    if RAW_DATA_SCHOOLS_URL in os.environ:
         url = os.environ(RAW_DATA_SCHOOLS_URL)
     else:
         url = 'https://data.cityofchicago.org/resource/gqgn-ekwj.csv'
@@ -64,17 +64,17 @@ def write_schools_to_gcs(df: pd.DataFrame) -> pd.DataFrame:
     logger = get_run_logger()
     logger.info('INFO: Starting upload schools data to GCS')
 
-    if GCS_BUCKET_SCHOOLS_PATH in os.environ():
+    if GCS_BUCKET_SCHOOLS_PATH in os.environ:
         to_path_place = os.environ(GCS_BUCKET_SCHOOLS_PATH)
     else:
         to_path_place = 'data/'
 
-    if GCS_BUCKET_SCHOOLS_FILE_NAME in os.environ():
+    if GCS_BUCKET_SCHOOLS_FILE_NAME in os.environ:
         to_path_file = os.environ(GCS_BUCKET_SCHOOLS_FILE_NAME)
     else:
         to_path_file = 'chicago_schools'
 
-    if GCS_BUCKET_BLOCK_NAME in os.environ():
+    if GCS_BUCKET_BLOCK_NAME in os.environ:
         bucket_block = os.environ(GCS_BUCKET_BLOCK_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'

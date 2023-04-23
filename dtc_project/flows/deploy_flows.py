@@ -19,7 +19,7 @@ def deploy_deploy_flow() -> None:
     logger = get_run_logger()
     logger.info('INFO: Starting deploy flow deployment')
 
-    if GCS_BUCKET_BLOCK_NAME in os.environ():
+    if GCS_BUCKET_BLOCK_NAME in os.environ:
         bucket_block = os.environ(GCS_BUCKET_BLOCK_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
@@ -45,7 +45,7 @@ def deploy_extract_crimes() -> None:
     logger = get_run_logger()
     logger.info('INFO: Starting deploy extract crimes deployment')
 
-    if GCS_BUCKET_BLOCK_NAME in os.environ():
+    if GCS_BUCKET_BLOCK_NAME in os.environ:
         bucket_block = os.environ(GCS_BUCKET_BLOCK_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
@@ -72,7 +72,7 @@ def deploy_extract_schools() -> None:
     logger = get_run_logger()
     logger.info('INFO: Starting deploy extract schools deployment')
 
-    if GCS_BUCKET_BLOCK_NAME in os.environ():
+    if GCS_BUCKET_BLOCK_NAME in os.environ:
         bucket_block = os.environ(GCS_BUCKET_BLOCK_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
@@ -99,7 +99,7 @@ def deploy_load_data_to_bq() -> None:
     logger = get_run_logger()
     logger.info('INFO: Starting deploy load data to BQ deployment')
 
-    if GCS_BUCKET_BLOCK_NAME in os.environ():
+    if GCS_BUCKET_BLOCK_NAME in os.environ:
         bucket_block = os.environ(GCS_BUCKET_BLOCK_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
