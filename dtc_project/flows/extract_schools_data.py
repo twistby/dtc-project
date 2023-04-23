@@ -65,17 +65,17 @@ def write_schools_to_gcs(df: pd.DataFrame) -> pd.DataFrame:
     logger.info('INFO: Starting upload schools data to GCS')
 
     if GCS_BUCKET_SCHOOLS_PATH in os.environ:
-        to_path_place = os.environ(GCS_BUCKET_SCHOOLS_PATH)
+        to_path_place = os.environ.get(GCS_BUCKET_SCHOOLS_PATH)
     else:
         to_path_place = 'data/'
 
     if GCS_BUCKET_SCHOOLS_FILE_NAME in os.environ:
-        to_path_file = os.environ(GCS_BUCKET_SCHOOLS_FILE_NAME)
+        to_path_file = os.environ.get(GCS_BUCKET_SCHOOLS_FILE_NAME)
     else:
         to_path_file = 'chicago_schools'
 
     if GCS_BUCKET_BLOCK_NAME in os.environ:
-        bucket_block = os.environ(GCS_BUCKET_BLOCK_NAME)
+        bucket_block = os.environ.get(GCS_BUCKET_BLOCK_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
 

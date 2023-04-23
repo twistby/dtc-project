@@ -19,54 +19,54 @@ GCS_BUCKET_SCHOOLS_PATH = 'GCS_BUCKET_SCHOOLS_PATH'
 GCS_BUCKET_SCHOOLS_FILE_NAME = 'GCS_BUCKET_SCHOOLS_FILE_NAME'
 
 if GCP_PROJECT_ID in os.environ:
-    gcp_project_name = os.environ(GCP_PROJECT_ID)
+    gcp_project_name = os.environ.get(GCP_PROJECT_ID)
 else:
     gcp_project_name = ''
 
 if BQ_BLOCK_NAME in os.environ:
-    bq_block_name = os.environ(BQ_BLOCK_NAME)
+    bq_block_name = os.environ.get(BQ_BLOCK_NAME)
 else:
     bq_block_name = 'DTC-DE-BQ-WAREHOUSE'
 
 if BQ_DATASET_NAME in os.environ:
-    bq_dataset_name = os.environ(BQ_DATASET_NAME)
+    bq_dataset_name = os.environ.get(BQ_DATASET_NAME)
 else:
     bq_dataset_name = 'chicago'
 
 if BQ_CRIMES_TABEL_NAME in os.environ:
-    bq_crimes_table_name = os.environ(BQ_CRIMES_TABEL_NAME)
+    bq_crimes_table_name = os.environ.get(BQ_CRIMES_TABEL_NAME)
 else:
     bq_crimes_table_name = 'crimes'
 
 if BQ_SCHOOLS_TABEL_NAME in os.environ:
-    bq_schools_table_name = os.environ(BQ_SCHOOLS_TABEL_NAME)
+    bq_schools_table_name = os.environ.get(BQ_SCHOOLS_TABEL_NAME)
 else:
     bq_schools_table_name = 'schools'
 
 
 if GCS_BUCKET_NAME in os.environ:
-    bucket_name = os.environ(GCS_BUCKET_NAME)
+    bucket_name = os.environ.get(GCS_BUCKET_NAME)
 else:
     bucket_name = 'chicago'
 
 if GCS_BUCKET_CRIMES_PATH in os.environ:
-    from_path_crimes = os.environ(GCS_BUCKET_CRIMES_PATH)
+    from_path_crimes = os.environ.get(GCS_BUCKET_CRIMES_PATH)
 else:
     from_path_crimes = 'data/crimes/'
 
 if GCS_BUCKET_CRIMES_FILE_NAME in os.environ:
-    crimes_file_name = os.environ(GCS_BUCKET_CRIMES_FILE_NAME)
+    crimes_file_name = os.environ.get(GCS_BUCKET_CRIMES_FILE_NAME)
 else:
     crimes_file_name = 'chicago_crimes_'
 
 
 if GCS_BUCKET_SCHOOLS_PATH in os.environ:
-    from_path_schools = os.environ(GCS_BUCKET_SCHOOLS_PATH)
+    from_path_schools = os.environ.get(GCS_BUCKET_SCHOOLS_PATH)
 else:
     from_path_schools = 'data/'
 
 if GCS_BUCKET_SCHOOLS_FILE_NAME in os.environ:
-    schools_file_name = os.environ(GCS_BUCKET_SCHOOLS_FILE_NAME)
+    schools_file_name = os.environ.get(GCS_BUCKET_SCHOOLS_FILE_NAME)
 else:
     schools_file_name = 'schools'
 

@@ -52,7 +52,7 @@ def get_crimes_for_month(year: int, month: int) -> pd.DataFrame:
         m=month,
     ))
     if RAW_DATA_CRIMES_URL in os.environ:
-        url = os.environ(RAW_DATA_CRIMES_URL)
+        url = os.environ.get(RAW_DATA_CRIMES_URL)
     else:
         url = 'https://data.cityofchicago.org/resource/ijzp-q8t2.csv'
 
@@ -114,17 +114,17 @@ def write_crimes_to_gcs(df: pd.DataFrame, year: int, month: int) -> None:
     ))
 
     if GCS_BUCKET_CRIMES_PATH in os.environ:
-        to_path_place = os.environ(GCS_BUCKET_CRIMES_PATH)
+        to_path_place = os.environ.get(GCS_BUCKET_CRIMES_PATH)
     else:
         to_path_place = 'data/crimes/'
 
     if GCS_BUCKET_CRIMES_FILE_NAME in os.environ:
-        to_path_file = os.environ(GCS_BUCKET_CRIMES_FILE_NAME)
+        to_path_file = os.environ.get(GCS_BUCKET_CRIMES_FILE_NAME)
     else:
         to_path_file = 'chicago_crimes_'
 
     if GCS_BUCKET_BLOCK_NAME in os.environ:
-        bucket_block = os.environ(GCS_BUCKET_BLOCK_NAME)
+        bucket_block = os.environ.get(GCS_BUCKET_BLOCK_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
 
