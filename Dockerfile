@@ -13,21 +13,22 @@ ENV PROJECT_ENV=${PROJECT_ENV} \
     PREFECT_KEY=pnu_hZUXf3mcZmtG3ylmpSWPT0cHIcMDaI1Yiocy \
     PREFECT_WORKSPACE=prefoutlookcom/dtc-project \
     GCP_PROJECT_ID=lithe-vault-375510 \
-    GCP_SERVICE_ACCOUNT=lithe-vault-375510-878d76efab6b \
-    GCP_SERVICE_ACCOUNT_KEY=lithe-vault-375510-878d76efab6b.json \
-    GCP_CREDENTIAL_BLOCK_NAME=DTC-DE-GCP-CREDENTIAL \
-    GCS_BUCKET_BLOCK_NAME=DTC-DE-BUCKET-BLOCK \
-    GCS_BUCKET_NAME=chicago \
+    GCP_SERVICE_ACCOUNT=lithe-vault-375510-9fb095e6d9fb \
+    GCP_SERVICE_ACCOUNT_KEY=lithe-vault-375510-9fb095e6d9fb.json \
+    GCP_CREDENTIAL_BLOCK_NAME=chicago-gcp-credentials \
+    GCS_BUCKET_BLOCK_NAME=chicago-gcs-bucket \
+    GCS_BUCKET_NAME=dtc-de-chicago \
+    GCS_DEV_BUCKET_NAME=dtc-de-chicago-dev \
     GCS_BUCKET_CRIMES_PATH=data/crimes/ \
     GCS_BUCKET_CRIMES_FILE_NAME=chicago_crimes_ \
     GCS_BUCKET_SCHOOLS_PATH=data/ \
     GCS_BUCKET_SCHOOLS_FILE_NAME=chicago_schools \
-    BQ_BLOCK_NAME=DTC-DE-BQ-WAREHOUSE \
+    BQ_BLOCK_NAME=chicago-warehouse \
     BQ_DATASET_NAME=chicago \
     BQ_CRIMES_TABEL_NAME=crimes \
     BQ_SCHOOLS_TABEL_NAME=schools \
-    DBT_CREDENTIAL_BLOCK_NAME=DTC-DE-DBT-CREDENTIAL \
-    DBT_JOB_BLOCK_NAME=DTC-DE-DBT-JOB \
+    DBT_CREDENTIAL_BLOCK_NAME=chicago-dbt-credentials \
+    DBT_JOB_BLOCK_NAME=chicago-dbt-job \
     DBT_API_KEY=cb6371120e359b9814424d4032a3eced7a70be76 \
     DBT_ACCOUNT_ID=148416 \
     DBT_JOB_ID=271407 \
@@ -42,13 +43,7 @@ RUN ./docker_setup.sh
 
 WORKDIR /code
 
-COPY prefect_setup.sh .
-
-RUN chmod +x prefect_setup.sh
-
 RUN pip install "poetry==$POETRY_VERSION"
-
-COPY dtc_project /code
 
 COPY poetry.lock pyproject.toml /code/
 
@@ -57,5 +52,11 @@ RUN poetry config virtualenvs.create false \
 
 RUN prefect block register -m prefect_gcp
 RUN prefect block register -m prefect_dbt
+
+COPY dtc_project /code
+
+COPY prefect_setup.sh .
+
+RUN chmod +x prefect_setup.sh
 
 ENTRYPOINT ["./prefect_setup.sh"]

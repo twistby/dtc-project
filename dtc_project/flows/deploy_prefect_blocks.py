@@ -1,6 +1,7 @@
-"""Setting up Prefect blocks."""
+"""test."""
+
+import json
 import os
-from pathlib import Path
 
 from prefect import flow, get_run_logger, task
 from prefect_dbt.cloud import DbtCloudCredentials, DbtCloudJob
@@ -10,6 +11,7 @@ GCP_SERVICE_ACCOUNT_KEY = 'GCP_SERVICE_ACCOUNT_KEY'
 GCP_CREDENTIAL_BLOCK_NAME = 'GCP_CREDENTIAL_BLOCK_NAME'
 GCP_CREDENTIAL_BLOCK_NAME = 'GCP_CREDENTIAL_BLOCK_NAME'
 GCS_BUCKET_NAME = 'GCS_BUCKET_NAME'
+GCS_DEV_BUCKET_NAME = 'GCS_DEV_BUCKET_NAME'
 GCS_BUCKET_BLOCK_NAME = 'GCS_BUCKET_BLOCK_NAME'
 DBT_API_KEY = 'DBT_API_KEY'
 DBT_ACCOUNT_ID = 'DBT_ACCOUNT_ID'
@@ -26,12 +28,14 @@ def create_gcp_credentials_block() -> None:
     logger = get_run_logger()
     logger.info('INFO: start ctreating GCP credentials block')
 
-    key_path = Path('dtc_project/keys/{key_name}'.format(
+    with open('/code/keys/{key_name}'.format(
         key_name=os.environ[GCP_SERVICE_ACCOUNT_KEY],
-    ))
+    )) as key_file:
+        crdentials = dict(json.load(key_file))
+
     GcpCredentials(
-        service_account_file=key_path,
-    ).save(os.environ[GCP_CREDENTIAL_BLOCK_NAME])
+        service_account_info=crdentials,
+    ).save(os.environ[GCP_CREDENTIAL_BLOCK_NAME], overwrite=True)
 
     logger.info('INFO: finished ctreating GCP credentials block')
 
@@ -49,6 +53,12 @@ def create_gcs_bucket_block() -> None:
         bucket=os.environ[GCS_BUCKET_NAME],
         gcp_credentials=gcp_credentials,
     ).save(os.environ[GCS_BUCKET_BLOCK_NAME], overwrite=True)
+
+    GcsBucket(
+        bucket=os.environ[GCS_DEV_BUCKET_NAME],
+        gcp_credentials=gcp_credentials,
+    ).save(os.environ[GCS_DEV_BUCKET_NAME], overwrite=True)
+
     logger.info('INFO: finished ctreating GCS-bucket block')
 
 
@@ -100,9 +110,9 @@ def create_dbt_cloud_job_block() -> None:
     logger.info('INFO: finished ctreating dbt-cloud-job block')
 
 
-@flow(name='create Prefect blocks')
-def create_prefect_blocks() -> None:
-    """Create GCS blocks flow."""
+@flow(name='Deploy blocks')
+def deploy_flows() -> None:
+    """Deploy blocks."""
     logger = get_run_logger()
     logger.info('INFO: starting creating Prefect blocks')
 
@@ -115,5 +125,5 @@ def create_prefect_blocks() -> None:
     logger.info('INFO: finished creating Prefect blocks')
 
 
-if __name__ == 'main':
-    create_prefect_blocks()
+if __name__ == '__main__':
+    deploy_flows()

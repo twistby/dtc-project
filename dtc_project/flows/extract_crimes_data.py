@@ -14,7 +14,7 @@ start_filter = '?$limit=100000'
 schema = {
     'id': 'int64',
     'case_number': 'string',
-    'date': 'datetime64',
+    'date': 'datetime64[ns]',
     'block': 'string',
     'iucr': 'string',
     'primary_type': 'string',
@@ -24,13 +24,13 @@ schema = {
     'domestic': 'bool',
     'beat': 'string',
     'district': 'string',
-    'ward': 'int64',
+    'ward': 'string',
     'community_area': 'string',
     'fbi_code': 'string',
     'x_coordinate': 'float64',
     'y_coordinate': 'float64',
     'year': 'int64',
-    'updated_on': 'datetime64',
+    'updated_on': 'datetime64[ns]',
     'latitude': 'float64',
     'longitude': 'float64',
     'location': 'string',
@@ -56,7 +56,7 @@ def get_crimes_for_month(year: int, month: int) -> pd.DataFrame:
     else:
         url = 'https://data.cityofchicago.org/resource/ijzp-q8t2.csv'
 
-    start_date = '&$where=date{p}20between{p}{y}-{m:02d}-01T00:00:00'.format(
+    start_date = '&$where=date{p}20between{p}20{p}27{y}-{m:02d}-01T00:00:00'.format(
         y=year,
         m=month,
         p='%',
@@ -67,7 +67,7 @@ def get_crimes_for_month(year: int, month: int) -> pd.DataFrame:
         d=calendar.monthrange(year, month)[1],
     )
 
-    data_filter = '{f}20{p}27{s}{p}27{p}20and{p}20{p}27{e}{p}27'.format(
+    data_filter = '{f}{s}{p}27{p}20and{p}20{p}27{e}{p}27'.format(
         f=start_filter,
         p='%',
         s=start_date,
@@ -97,6 +97,7 @@ def clean_crimes(df: pd.DataFrame) -> pd.DataFrame:
 
     df = df[df[[latitude_column]].notnull().all(1)]
     df = df[df[[longitude_column]].notnull().all(1)]
+    df.fillna('', inplace=True)
     df = df.astype(schema)
 
     logger.info('INFO: Finishing cleaning data')

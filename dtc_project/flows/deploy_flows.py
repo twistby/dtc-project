@@ -10,7 +10,7 @@ from prefect.deployments import Deployment
 from prefect.server.schemas.schedules import CronSchedule
 from prefect_gcp.cloud_storage import GcsBucket
 
-GCS_BUCKET_BLOCK_NAME = 'GCS_BUCKET_BLOCK_NAME'
+GCS_DEV_BUCKET_NAME = 'GCS_DEV_BUCKET_NAME'
 
 
 @task(name='Deploy deploy flow')
@@ -19,8 +19,8 @@ def deploy_deploy_flow() -> None:
     logger = get_run_logger()
     logger.info('INFO: Starting deploy flow deployment')
 
-    if GCS_BUCKET_BLOCK_NAME in os.environ:
-        bucket_block = os.environ.get(GCS_BUCKET_BLOCK_NAME)
+    if GCS_DEV_BUCKET_NAME in os.environ:
+        bucket_block = os.environ.get(GCS_DEV_BUCKET_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
 
@@ -45,8 +45,8 @@ def deploy_extract_crimes() -> None:
     logger = get_run_logger()
     logger.info('INFO: Starting deploy extract crimes deployment')
 
-    if GCS_BUCKET_BLOCK_NAME in os.environ:
-        bucket_block = os.environget(GCS_BUCKET_BLOCK_NAME)
+    if GCS_DEV_BUCKET_NAME in os.environ:
+        bucket_block = os.environ.get(GCS_DEV_BUCKET_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
 
@@ -72,8 +72,8 @@ def deploy_extract_schools() -> None:
     logger = get_run_logger()
     logger.info('INFO: Starting deploy extract schools deployment')
 
-    if GCS_BUCKET_BLOCK_NAME in os.environ:
-        bucket_block = os.environ.get(GCS_BUCKET_BLOCK_NAME)
+    if GCS_DEV_BUCKET_NAME in os.environ:
+        bucket_block = os.environ.get(GCS_DEV_BUCKET_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
 
@@ -93,14 +93,14 @@ def deploy_extract_schools() -> None:
     logger.info('INFO: Deploy extract schools deployment complete')
 
 
-@task(name='Deploy schools extraction flow')
+@task(name='Deploy loading to BQ flow')
 def deploy_load_data_to_bq() -> None:
     """Deploy load data to BQ flow."""
     logger = get_run_logger()
     logger.info('INFO: Starting deploy load data to BQ deployment')
 
-    if GCS_BUCKET_BLOCK_NAME in os.environ:
-        bucket_block = os.environ.get(GCS_BUCKET_BLOCK_NAME)
+    if GCS_DEV_BUCKET_NAME in os.environ:
+        bucket_block = os.environ.get(GCS_DEV_BUCKET_NAME)
     else:
         bucket_block = 'DTC-DE-BUCKET-BLOCK'
 

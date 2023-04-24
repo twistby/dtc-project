@@ -29,10 +29,10 @@ GCS_BUCKET_SCHOOLS_PATH = 'GCS_BUCKET_SCHOOLS_PATH'
 def get_schools() -> pd.DataFrame:
     """Extract row schools data from URL."""
     logger = get_run_logger()
-    logger.info('INFO: Starting ingesting schools data for')
+    logger.info('INFO: Starting ingesting schools data')
 
     if RAW_DATA_SCHOOLS_URL in os.environ:
-        url = os.environ(RAW_DATA_SCHOOLS_URL)
+        url = os.environ.get(RAW_DATA_SCHOOLS_URL)
     else:
         url = 'https://data.cityofchicago.org/resource/gqgn-ekwj.csv'
 
@@ -50,8 +50,6 @@ def clean_schools(df: pd.DataFrame) -> pd.DataFrame:
     logger = get_run_logger()
     logger.info('INFO: Starting cleaning schools data')
 
-    df = df[df[[latitude_column]].notnull().all(1)]
-    df = df[df[[longitude_column]].notnull().all(1)]
     df = df.astype(schema)
 
     logger.info('INFO: Finishing cleaning schools data')
@@ -83,7 +81,7 @@ def write_schools_to_gcs(df: pd.DataFrame) -> pd.DataFrame:
         p=to_path_place,
         f=to_path_file,
     )
-    gcs_bucket = GcsBucket.load(os.environ(bucket_block))
+    gcs_bucket = GcsBucket.load(bucket_block)
     gcs_bucket.upload_from_dataframe(
         df=df,
         to_path=to_path,
@@ -92,7 +90,7 @@ def write_schools_to_gcs(df: pd.DataFrame) -> pd.DataFrame:
     logger.info('INFO: Uploading schools data to GCS complete')
 
 
-@flow(name='Ingest row data to GCS Bucket')
+@flow(name='Ingest row schools data')
 def extract_schools() -> None:
     """Ingest row schools data."""
     logger = get_run_logger()

@@ -9,9 +9,11 @@ packages = [{include = "dtc_project"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 prefect = "^2.10.5"
-prefect-gcp = "^0.4.1"
+prefect-gcp = {extras = ["bigquery"], version = "^0.4.1"}
 prefect-dbt = "^0.3.1"
 pandas = "^2.0.0"
+pyarrow = "^11.0.0"
+fastparquet = "^2023.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
