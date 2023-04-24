@@ -125,6 +125,7 @@ def deploy_flows() -> None:
     deploy_deploy_flow()
     deploy_extract_crimes()
     deploy_extract_schools()
+    deploy_load_data_to_bq()
 
 
 if __name__ == '__main__':

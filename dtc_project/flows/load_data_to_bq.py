@@ -102,10 +102,10 @@ def create_crimes_table() -> None:
     logger.info('INFO: Starting load crimes to partitioned table')
     with BigQueryWarehouse.load(bq_block_name) as warehouse:
         operation = """
-        CREATE OR REPLACE TABLE {project}.{dataset}.{table}
+        CREATE OR REPLACE TABLE `{project}.{dataset}.{table}`
         PARTITION BY DATE(date)
         CLUSTER BY location_description AS
-        SELECT * FROM {project}.{dataset}.external_{table};
+        SELECT * FROM `{project}.{dataset}.external_{table}`;
         """.format(  # noqa: WPS462
             project=gcp_project_name,
             dataset=bq_dataset_name,
@@ -146,10 +146,8 @@ def create_schools_table() -> None:
     logger.info('INFO: Starting load schools to table')
     with BigQueryWarehouse.load(bq_block_name) as warehouse:
         operation = """
-        CREATE OR REPLACE TABLE {project}.{dataset}.{table}
-        PARTITION BY DATE(date)
-        CLUSTER BY location_description AS
-        SELECT * FROM {project}.{dataset}.external_{table};
+        CREATE OR REPLACE TABLE `{project}.{dataset}.{table}` AS
+        SELECT * FROM `{project}.{dataset}.external_{table}`;
         """.format(  # noqa: WPS462
             project=gcp_project_name,
             dataset=bq_dataset_name,
