@@ -158,8 +158,9 @@ def ingest_crimes_for_year(year: int) -> None:
             m=month,
         ))
         row_df = get_crimes_for_month(year, month)
-        clean_df = clean_crimes(row_df)
-        write_crimes_to_gcs(clean_df, year, month)
+        if not row_df.empty:
+            clean_df = clean_crimes(row_df)
+            write_crimes_to_gcs(clean_df, year, month)
         logger.info('INFO: Ingesting crimes data for {y}-{m:02d} complete'.format(
             y=year,
             m=month,

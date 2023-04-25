@@ -26,7 +26,7 @@ else:
 if BQ_BLOCK_NAME in os.environ:
     bq_block_name = os.environ.get(BQ_BLOCK_NAME)
 else:
-    bq_block_name = 'DTC-DE-BQ-WAREHOUSE'
+    bq_block_name = 'chicago-warehouse'
 
 if BQ_DATASET_NAME in os.environ:
     bq_dataset_name = os.environ.get(BQ_DATASET_NAME)
@@ -103,7 +103,8 @@ def create_crimes_table() -> None:
     with BigQueryWarehouse.load(bq_block_name) as warehouse:
         operation = """
         CREATE OR REPLACE TABLE `{project}.{dataset}.{table}`
-        PARTITION BY DATE(date)
+        PARTITION BY
+        DATE_TRUNC(date,MONTH)
         CLUSTER BY location_description AS
         SELECT * FROM `{project}.{dataset}.external_{table}`;
         """.format(  # noqa: WPS462

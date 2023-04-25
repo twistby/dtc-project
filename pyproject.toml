@@ -14,6 +14,7 @@ prefect-dbt = "^0.3.1"
 pandas = "^2.0.0"
 pyarrow = "^11.0.0"
 fastparquet = "^2023.2.0"
+dbt-bigquery = "^1.4.3"
 
 
 [tool.poetry.group.dev.dependencies]

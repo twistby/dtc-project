@@ -1,0 +1,9 @@
+version: 2
+sources:  
+  - name: staging    
+    database: lithe-vault-375510
+    schema: chicago
+    
+    tables:
+      - name: crimes
+      - name: schools

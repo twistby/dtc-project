@@ -25,13 +25,14 @@ ENV PROJECT_ENV=${PROJECT_ENV} \
     GCS_BUCKET_SCHOOLS_FILE_NAME=chicago_schools \
     BQ_BLOCK_NAME=chicago-warehouse \
     BQ_DATASET_NAME=chicago \
+    BQ_PROD_DATASET_NAME=chicago_prod  \
     BQ_CRIMES_TABEL_NAME=crimes \
     BQ_SCHOOLS_TABEL_NAME=schools \
     DBT_CREDENTIAL_BLOCK_NAME=chicago-dbt-credentials \
     DBT_JOB_BLOCK_NAME=chicago-dbt-job \
     DBT_API_KEY=cb6371120e359b9814424d4032a3eced7a70be76 \
-    DBT_ACCOUNT_ID=148416 \
-    DBT_JOB_ID=271407 \
+    DBT_ACCOUNT_ID=164738 \
+    DBT_JOB_ID=281430 \
     RAW_DATA_CRIMES_URL=https://data.cityofchicago.org/resource/ijzp-q8t2.csv \
     RAW_DATA_SCHOOLS_URL=https://data.cityofchicago.org/resource/gqgn-ekwj.csv
 
@@ -40,6 +41,8 @@ COPY docker_setup.sh .
 RUN chmod +x docker_setup.sh
 
 RUN ./docker_setup.sh
+
+RUN mkdir root/.dbt
 
 WORKDIR /code
 
