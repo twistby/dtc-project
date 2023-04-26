@@ -43,7 +43,7 @@ In developing it, I used
 
 ![Data diagram](https://github.com/twistby/dtc-project/blob/main/dtc_project/misc/rel.jpg)
 
-Reproduce it yourself
+## Reproduce it yourself
 
 ##### 1. Repo
 Fork this repo, and clone it to your local environment.
