@@ -127,7 +127,7 @@ def write_crimes_to_gcs(df: pd.DataFrame, year: int, month: int) -> None:
     if GCS_BUCKET_BLOCK_NAME in os.environ:
         bucket_block = os.environ.get(GCS_BUCKET_BLOCK_NAME)
     else:
-        bucket_block = 'DTC-DE-BUCKET-BLOCK'
+        bucket_block = 'chicago-gcs-bucket'
 
     to_path = '{p}{f}_{y}_{m:02d}.parquet'.format(
         p=to_path_place,
