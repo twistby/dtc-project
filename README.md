@@ -103,7 +103,9 @@ Type 'yes' when prompted.
 
 ##### 5. dbt cloud
 
-Only if you have paid dbt cloud account, load this [repo](https://github.com/twistby/chicago-crimes.git), set connection to BigQuery and create job with 'dbt build' command
+dbt cloud only allows to use API in paid accounts.
+If you have paid dbt cloud account, load this [repo](https://github.com/twistby/chicago-crimes.git), set connection to BigQuery and create job with 'dbt build' command
+
 
 ##### 5. Docker
 
@@ -125,6 +127,10 @@ How to get dbt values:
 - On the same page, press Projects in the sidebar.
 - The url will change to: cloud.getdbt.com/settings/accounts/YOUR ACCOUNT ID
 - Copy account id
+- Open the Deploy - Jobs and choose required job
+- The url will change to: cloud.getdbt.com/deploy/YOUR ACCOUNT ID/projects/YOUR PROJECT ID/jobs/YOUR JOB ID
+
+
 
 > Note that the dbt cloud API is only available for paid accounts.
 > In case you don't have one, use dbt core flow to transform data.
