@@ -162,9 +162,11 @@ All you need to do is run the following deployments
 3. Load data to BQ/load data to BQ	
 
 If you don't have paid dbt cloud account run 
+
 4. Transform data with dbt cli/run dbt
 
 If you have paid dbt cloud account
+
 4. Transform data with dbt cloud/run dbt-cloud job
 
 After that, tables will be created in the BigQuery product dataset for further visualization of the information 
