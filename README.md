@@ -46,8 +46,7 @@ In developing it, I used
 ## Reproduce it yourself
 
 ##### 1. Repo
-Fork this repo, and clone it to your local environment.
-https://github.com/twistby/dtc-project.git
+Fork this [repo](https://github.com/twistby/dtc-project.git), and clone it to your local environment.
 
 
 ##### 2. Google Cloud
@@ -162,11 +161,9 @@ All you need to do is run the following deployments
 3. Load data to BQ/load data to BQ	
 
 If you don't have paid dbt cloud account run 
-
-4. Transform data with dbt cli/run dbt
+- Transform data with dbt cli/run dbt
 
 If you have paid dbt cloud account
+- Transform data with dbt cloud/run dbt-cloud job
 
-4. Transform data with dbt cloud/run dbt-cloud job
-
-After that, tables will be created in the BigQuery product dataset for further visualization of the information 
+After that, tables will be created in the BigQuery product dataset for further visualization of the information.
