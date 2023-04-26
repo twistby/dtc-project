@@ -9,8 +9,8 @@ GCP_PROJECT_ID = 'GCP_PROJECT'
 
 BQ_BLOCK_NAME = 'BQ_BLOCK_NAME'
 BQ_DATASET_NAME = 'BQ_DATASET_NAME'
-BQ_CRIMES_TABEL_NAME = 'BQ_CRIMES_TABEL_NAME'
-BQ_SCHOOLS_TABEL_NAME = 'BQ_SCHOOLS_TABEL_NAME'
+BQ_CRIMES_TABLE_NAME = 'BQ_CRIMES_TABLE_NAME'
+BQ_SCHOOLS_TABLE_NAME = 'BQ_SCHOOLS_TABLE_NAME'
 
 GCS_BUCKET_NAME = 'GCS_BUCKET_NAME'
 GCS_BUCKET_CRIMES_PATH = 'GCS_BUCKET_CRIMES_PATH'
@@ -33,13 +33,13 @@ if BQ_DATASET_NAME in os.environ:
 else:
     bq_dataset_name = 'chicago'
 
-if BQ_CRIMES_TABEL_NAME in os.environ:
-    bq_crimes_table_name = os.environ.get(BQ_CRIMES_TABEL_NAME)
+if BQ_CRIMES_TABLE_NAME in os.environ:
+    bq_crimes_table_name = os.environ.get(BQ_CRIMES_TABLE_NAME)
 else:
     bq_crimes_table_name = 'crimes'
 
-if BQ_SCHOOLS_TABEL_NAME in os.environ:
-    bq_schools_table_name = os.environ.get(BQ_SCHOOLS_TABEL_NAME)
+if BQ_SCHOOLS_TABLE_NAME in os.environ:
+    bq_schools_table_name = os.environ.get(BQ_SCHOOLS_TABLE_NAME)
 else:
     bq_schools_table_name = 'schools'
 

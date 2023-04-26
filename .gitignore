@@ -5,4 +5,3 @@ dist/
 .vscode/
 .DS_Store
 dtc_project/keys/*.json
-setup.cfg
